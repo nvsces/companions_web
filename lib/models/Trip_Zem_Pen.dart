@@ -1,5 +1,6 @@
 import 'package:companions_web/models/trip.dart';
 import 'package:companions_web/models/user.dart';
+import 'package:companions_web/screens/detail_trip.dart';
 import 'package:companions_web/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -89,6 +90,10 @@ class _Trip_Zem_PenState extends State<Trip_Zem_Pen> {
     return Card(
         color: getColorCard(trip.group),
         child: ListTile(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (ctx) => DetailTrip(trip)));
+            },
             leading: Column(
               children: <Widget>[getImageGroup(trip.group)],
               mainAxisSize: MainAxisSize.min,

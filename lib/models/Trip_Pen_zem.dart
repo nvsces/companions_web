@@ -1,7 +1,9 @@
 import 'package:companions_web/models/trip.dart';
 import 'package:companions_web/models/user.dart';
+import 'package:companions_web/screens/detail_trip.dart';
 import 'package:companions_web/services/database.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Trip_Pen_Zem extends StatefulWidget {
   Trip_Pen_Zem({Key key}) : super(key: key);
@@ -28,7 +30,9 @@ class _Trip_Pen_ZemState extends State<Trip_Pen_Zem> {
     var stream = db.getTrips(route);
     stream.listen((List<Trip> data) {
       setState(() {
+        data.sort((a, b) => a.time.compareTo(b.time));
         trips = data;
+        print(trips.length.toString());
       });
     });
   }
@@ -39,55 +43,90 @@ class _Trip_Pen_ZemState extends State<Trip_Pen_Zem> {
 
   Widget tripInfo(BuildContext context, Trip trip) {
     return Column(children: <Widget>[
-      Text(trip.route),
+      Text(
+        trip.route,
+        style: TextStyle(fontSize: 1000.0),
+      ),
       //     Text(trip.seats),
       //    Text(trip.time)
     ]);
   }
 
+  Color getColorCard(String group) {
+    if (group == 'Водитель')
+      return Colors.blue;
+    else
+      return Colors.green;
+  }
+
+  Widget getImageGroup(String group) {
+    if (group == 'Водитель')
+      return Image.asset(
+        'assets/images/driver.jpg',
+        scale: 3,
+      );
+    else
+      return Image.asset(
+        'assets/images/pas.jpg',
+        scale: 6.5,
+      );
+  }
+
+  Widget getDeleteButton(Trip trip) {
+    if (user.id == null) return SizedBox();
+    if (user.id == trip.author) {
+      return IconButton(
+        color: Colors.white,
+        icon: Icon(Icons.delete),
+        onPressed: () {
+          _deleteTrip(trip.docPath);
+        },
+      );
+    } else
+      return SizedBox();
+  }
+
+  Widget listCard(Trip trip) {
+    return Card(
+        color: getColorCard(trip.group),
+        child: ListTile(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (ctx) => DetailTrip(trip)));
+            },
+            leading: Column(
+              children: <Widget>[getImageGroup(trip.group)],
+              mainAxisSize: MainAxisSize.min,
+            ),
+            title: Text(
+              trip.route,
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
+            subtitle: Column(children: <Widget>[
+              Text(trip.time,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold)),
+              Text('Количество мест: ' + trip.seats,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold))
+            ]),
+            trailing: getDeleteButton(trip)));
+  }
+
   @override
   Widget build(BuildContext context) {
+    user = Provider.of<myUser>(context);
     return Container(
       child: Container(
         child: ListView.builder(
             itemCount: trips.length,
             itemBuilder: (context, i) {
-              return Card(
-                  elevation: 2.0,
-                  margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  child: Container(
-                    child: ListTile(
-                      contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                      leading: Container(
-                        padding: EdgeInsets.only(right: 12),
-                        child: Icon(
-                          Icons.car_repair,
-                          color: Colors.black,
-                        ),
-                      ),
-                      title: tripInfo(context, trips[i]),
-                      subtitle: Column(
-                        children: <Widget>[
-                          Text(trips[i].time),
-                          Text('Количество мест: ' + trips[i].seats),
-                          Text(trips[i].phone),
-                          Text(trips[i].group)
-                        ],
-                      ),
-                      trailing: Column(
-                        children: <Widget>[
-                          // ignore: missing_required_param
-                          IconButton(
-                            color: Theme.of(context).primaryColor,
-                            icon: Icon(Icons.delete),
-                            onPressed: () {
-                              _deleteTrip(trips[i].docPath);
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  ));
+              return listCard(trips[i]);
             }),
       ),
     );

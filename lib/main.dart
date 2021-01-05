@@ -17,6 +17,7 @@ class CompanionsApp extends StatelessWidget {
     return StreamProvider<myUser>.value(
         value: AuthService().currentUser,
         child: MaterialApp(
+            debugShowCheckedModeBanner: false,
             title: 'CompanionsP',
             theme: ThemeData(
                 primaryColor: Color.fromRGBO(230, 148, 46, 1),
