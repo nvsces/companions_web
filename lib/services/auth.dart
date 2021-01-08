@@ -1,5 +1,5 @@
 import 'package:companions_web/models/user.dart';
-import 'package:companions_web/screens/auth_services.dart';
+import 'package:companions_web/services/auth_services.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 

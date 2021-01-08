@@ -73,6 +73,7 @@ class _Trip_Zem_MosState extends State<Trip_Zem_Mos> {
   }
 
   Widget getDeleteButton(Trip trip) {
+    if (user == null) return SizedBox();
     if (user.id == null) return SizedBox();
     if (user.id == trip.author) {
       return IconButton(

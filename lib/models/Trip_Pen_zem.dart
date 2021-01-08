@@ -73,6 +73,7 @@ class _Trip_Pen_ZemState extends State<Trip_Pen_Zem> {
   }
 
   Widget getDeleteButton(Trip trip) {
+    if (user == null) return SizedBox();
     if (user.id == null) return SizedBox();
     if (user.id == trip.author) {
       return IconButton(
