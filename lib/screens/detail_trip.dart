@@ -22,6 +22,7 @@ class DetailTrip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text('Поездка')),
       body: Center(
           child: Column(
         children: <Widget>[

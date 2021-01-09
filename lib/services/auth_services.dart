@@ -1,8 +1,13 @@
 import 'package:companions_web/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase/firebase.dart' as firebase;
 
 class AuthService {
   final FirebaseAuth _fAuth = FirebaseAuth.instance;
+
+  void persistens() {
+    _fAuth.setPersistence(Persistence.LOCAL);
+  }
 
   Future<ConfirmationResult> sendCode(String phone) async {
     var recapcha = RecaptchaVerifier(
@@ -14,7 +19,6 @@ class AuthService {
     );
     ConfirmationResult confirmationResult =
         await _fAuth.signInWithPhoneNumber(phone, recapcha);
-    recapcha.clear();
     return confirmationResult;
   }
 
@@ -56,6 +60,10 @@ class AuthService {
 
   Future logOut() async {
     await _fAuth.signOut();
+  }
+
+  Stream<myUser> firstUser() {
+    _fAuth.authStateChanges();
   }
 
   Stream<myUser> get currentUser {

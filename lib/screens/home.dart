@@ -3,10 +3,14 @@ import 'package:companions_web/models/Trip_Pen_zem.dart';
 import 'package:companions_web/models/Trip_Zem_Mos.dart';
 import 'package:companions_web/models/Trip_Zem_Pen.dart';
 import 'package:companions_web/models/user.dart';
+import 'package:companions_web/models/user.dart';
+import 'package:companions_web/models/user.dart';
+import 'package:companions_web/models/user.dart';
 import 'package:companions_web/screens/add_trip.dart';
-import 'package:companions_web/screens/login.dart';
+import 'package:companions_web/services/auth.dart';
 import 'package:companions_web/services/auth_services.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,6 +23,22 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int sectionIndex = 0;
+  bool firstInit = true;
+  // myUser user;
+  AuthService _authService = AuthService();
+
+  @override
+  void initState() {
+    //loadUser();
+    firstInit = false;
+    super.initState();
+  }
+
+  /* void loadUser() async {
+    firstInit
+        ? user = await AuthService().firstUser
+        : user = user = Provider.of<myUser>(context);
+  }*/
 
   Widget bodyItem(int itemIndex) {
     switch (itemIndex) {
@@ -41,6 +61,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    //loadUser();
     final myUser user = Provider.of<myUser>(context);
     final bool isLoggedIn = user != null;
     var navigationBar = CurvedNavigationBar(
@@ -82,8 +103,10 @@ class _HomePageState extends State<HomePage> {
                   )
                 : FlatButton.icon(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (ctx) => LoginScreen()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (ctx) => AuthorizationPage()));
                     },
                     icon: Icon(Icons.supervised_user_circle,
                         color: Theme.of(context).primaryColor),

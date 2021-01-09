@@ -1,4 +1,5 @@
 import 'package:companions_web/models/user.dart';
+import 'package:companions_web/screens/home.dart';
 import 'package:companions_web/services/auth_services.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -18,10 +19,11 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
   String _password;
   bool showLogin = true;
 
-  AuthService _authService = AuthService();
+  //AuthService _authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
+    AuthService().persistens();
     Widget _logo() {
       return Padding(
           padding: EdgeInsets.only(top: 100),
@@ -108,8 +110,8 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
 
       if (_email.isEmpty || _password.isEmpty) return;
 
-      myUser user = await _authService.signInWithEmailAndPassword(
-          _email.trim(), _password.trim());
+      myUser user = await AuthService()
+          .signInWithEmailAndPassword(_email.trim(), _password.trim());
 
       if (user == null) {
         Fluttertoast.showToast(
@@ -123,6 +125,7 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
       } else {
         _emailController.clear();
         _passwordController.clear();
+        Navigator.pop(context);
       }
     }
 
@@ -132,8 +135,8 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
 
       if (_email.isEmpty || _password.isEmpty) return;
 
-      myUser user = await _authService.registrWithEmailAndPassword(
-          _email.trim(), _password.trim());
+      myUser user = await AuthService()
+          .registrWithEmailAndPassword(_email.trim(), _password.trim());
 
       if (user == null) {
         Fluttertoast.showToast(msg: 'Toast work');
@@ -144,6 +147,7 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
     }
 
     return Scaffold(
+        appBar: AppBar(title: Text('Аунтефикация')),
         backgroundColor: Theme.of(context).primaryColor,
         body: Column(
           children: <Widget>[

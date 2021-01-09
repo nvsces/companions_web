@@ -104,7 +104,7 @@ class _AddTripState extends State<AddTrip> {
     user = Provider.of<myUser>(context);
     return Scaffold(
         appBar: AppBar(
-          title: Text('MaxFit // Create Workout'),
+          title: Text('Создание поездки'),
         ),
         body: Container(
             padding: EdgeInsets.all(10),
@@ -113,7 +113,7 @@ class _AddTripState extends State<AddTrip> {
               key: _formKey,
               child: Column(children: <Widget>[
                 Text(
-                  route,
+                  getRouteName(widget.sectionIndex),
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 FormBuilderDateTimePicker(

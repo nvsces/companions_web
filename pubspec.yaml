@@ -38,6 +38,7 @@ dependencies:
   flutter_form_builder: ^3.8.3
   firebase_database: ^4.4.0
   pinput: ^0.2.6
+  firebase: ^8.0.0
 
 dev_dependencies:
   flutter_test:
