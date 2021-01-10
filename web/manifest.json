@@ -1,6 +1,6 @@
 {
-    "name": "companions_web",
-    "short_name": "companions_web",
+    "name": "Попутчики в Земетчино",
+    "short_name": "Попутчики в Земетчино",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

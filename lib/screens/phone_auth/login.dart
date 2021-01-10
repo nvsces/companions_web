@@ -1,4 +1,4 @@
-import 'package:companions_web/screens/otp.dart';
+import 'package:companions_web/screens/phone_auth/otp.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {

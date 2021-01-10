@@ -35502,7 +35502,7 @@ D:function(a,b){var s,r,q=null,p=firebase.auth(),o=new N.QR(E.arc(p))
 o=o.ga4o(o)
 s=X.alt(q,new P.A(4293301294),R.agy(q,q,q,q,q,q,q,q,q,q,q,q,q,A.bP(q,q,C.l,q,q,q,q,q,q,q,q,q,q,q,q,q,!0,q,q,q,q,q,q)))
 r=P.ad(["/",new F.S_(),"/auth",new F.S0()],t.X,t.FD)
-return new Q.xa(new Y.nS(o,q,Q.axA(q,q,t.GN),t.Cr),q,q,new S.vm(r,"CompanionsP",s,!1,q),q,t.Oy)}}
+return new Q.xa(new Y.nS(o,q,Q.axA(q,q,t.GN),t.Cr),q,q,new S.vm(r,"\u041f\u043e\u043f\u0443\u0442\u0447\u0438\u043a\u0438 \u0432 \u0417\u0435\u043c\u0435\u0442\u0447\u0438\u043d\u043e",s,!1,q),q,t.Oy)}}
 F.S_.prototype={
 $1:function(a){return new Y.mu(null)},
 $S:262}

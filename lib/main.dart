@@ -1,3 +1,4 @@
+import 'package:companions_web/const.dart';
 import 'package:companions_web/models/user.dart';
 import 'package:companions_web/screens/detail_trip.dart';
 import 'package:companions_web/screens/home.dart';
@@ -15,25 +16,6 @@ void main() async {
 }
 
 class CompanionsApp extends StatelessWidget {
-  Widget buildStream() {
-    return StreamBuilder(
-        stream: AuthService().firstUser(),
-        builder: (BuildContext context, snapshot) {
-          return StreamProvider<myUser>.value(
-              value: AuthService().currentUser,
-              child: MaterialApp(
-                  debugShowCheckedModeBanner: false,
-                  title: 'CompanionsP',
-                  theme: ThemeData(
-                      primaryColor: Color.fromRGBO(230, 148, 46, 1),
-                      textTheme:
-                          TextTheme(title: TextStyle(color: Colors.white))),
-                  routes: <String, WidgetBuilder>{
-                    '/': (context) => HomePage(),
-                    '/auth': (context) => AuthorizationPage()
-                  }));
-        });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +23,7 @@ class CompanionsApp extends StatelessWidget {
         value: AuthFirebase().currentUser,
         child: MaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'CompanionsP',
+            title: main_title,
             theme: ThemeData(
                 primaryColor: Color.fromRGBO(230, 148, 46, 1),
                 textTheme: TextTheme(title: TextStyle(color: Colors.white))),
