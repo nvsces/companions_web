@@ -287,10 +287,10 @@ const RESOURCES = {
 "icons/Icon-72.png": "9b629b514666523b111ac1aeab074aee",
 "icons/Icon-76.png": "28d5433939c4bbd4c439c55a8f90db4e",
 "icons/Icon-96.png": "f4426d62eadf88c56b46b83eee0b982a",
-"index.html": "ef58b925d3522d657edbf855034ec75e",
-"/": "ef58b925d3522d657edbf855034ec75e",
+"index.html": "71e81c491938c18146ffe9005927c190",
+"/": "71e81c491938c18146ffe9005927c190",
 "main.dart.js": "4f1bd7a818be8058920753c7b5cbe0e1",
-"manifest.json": "adc3fde70d74389002bc6fbe369c5c96",
+"manifest.json": "15791d441d4bbbe92bc0be8247ecc4d0",
 "version.json": "363977d80afcd52113ab8a6210d88759",
 "web.rar": "36678d839f16503570f7eea3a4bdfbf4"
 };
