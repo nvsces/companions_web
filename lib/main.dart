@@ -16,7 +16,6 @@ void main() async {
 }
 
 class CompanionsApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return StreamProvider<myUser>.value(

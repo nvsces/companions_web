@@ -7,6 +7,7 @@ class Trip {
   String group;
   String author;
   String docPath;
+  String comment = "";
 
   Trip(
       {this.uid,
@@ -16,7 +17,8 @@ class Trip {
       this.phone,
       this.group,
       this.author,
-      this.docPath});
+      this.docPath,
+      this.comment});
 
   Trip.fromJson(String uid, Map<String, dynamic> data) {
     this.uid = uid;
@@ -27,6 +29,7 @@ class Trip {
     group = data['group'];
     author = data['author'];
     docPath = data['docPath'];
+    comment = data['comment'];
   }
 
   Map<String, dynamic> toMap() {
@@ -37,7 +40,8 @@ class Trip {
       'phone': phone,
       'group': group,
       'author': author,
-      'docPath': docPath
+      'docPath': docPath,
+      'comment': comment
     };
   }
 }

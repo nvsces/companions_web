@@ -176,6 +176,19 @@ class _AddTripState extends State<AddTrip> {
                     });
                   },
                 ),
+                FormBuilderTextField(
+                  initialValue: "тестовый текст",
+                  keyboardType: TextInputType.text,
+                  attribute: 'comment',
+                  decoration: InputDecoration(
+                    labelText: "Комментарий (не обязательно)",
+                  ),
+                  onChanged: (dynamic val) {
+                    setState(() {
+                      trip.comment = val;
+                    });
+                  },
+                ),
                 RaisedButton(
                   splashColor: Theme.of(context).primaryColor,
                   highlightColor: Theme.of(context).primaryColor,

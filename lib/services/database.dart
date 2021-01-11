@@ -1,30 +1,31 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:companions_web/models/trip.dart';
+import 'package:companions_web/services/const.dart';
 
 class DatabaseService {
   final CollectionReference _pen_zemCollection =
-      FirebaseFirestore.instance.collection('Pen_Zem');
+      FirebaseFirestore.instance.collection(PenZem);
   final CollectionReference _zem_penCollection =
-      FirebaseFirestore.instance.collection('Zem_Pen');
+      FirebaseFirestore.instance.collection(ZemPen);
   final CollectionReference _mos_zemCollection =
-      FirebaseFirestore.instance.collection('Mos_Zem');
+      FirebaseFirestore.instance.collection(MosZem);
   final CollectionReference _zem_mosCollection =
-      FirebaseFirestore.instance.collection('Zem_Mos');
+      FirebaseFirestore.instance.collection(ZemMos);
 
   CollectionReference _routeCollection;
 
   CollectionReference getRouteCollction(String route) {
     switch (route) {
-      case 'Pen_Zem':
+      case PenZem:
         return _pen_zemCollection;
         break;
-      case 'Zem_Pen':
+      case ZemPen:
         return _zem_penCollection;
         break;
-      case 'Mos_Zem':
+      case MosZem:
         return _mos_zemCollection;
         break;
-      case 'Zem_Mos':
+      case ZemMos:
         return _zem_mosCollection;
         break;
       default:
