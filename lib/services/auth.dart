@@ -30,6 +30,7 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
           child: Container(
               child: Align(
                   child: Text('Попутчики Земетчино',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 35,
                           fontWeight: FontWeight.bold,
@@ -150,11 +151,13 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
         appBar: AppBar(title: Text('Аунтефикация')),
         backgroundColor: Theme.of(context).primaryColor,
         body: Column(
+          mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             _logo(),
             SizedBox(height: 100),
             (showLogin
                 ? Column(
+                    mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
                       _form('ВОЙТИ', _loginButtonAction),
                       Padding(
@@ -172,6 +175,7 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
                     ],
                   )
                 : Column(
+                    mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
                       _form('ЗАРЕГИСТРИРОВАТЬСЯ', _registrButtonAction),
                       Padding(
