@@ -135,8 +135,5 @@ class _HomePageState extends State<HomePage> {
     );
     return Provider<String>(
         create: (context) => getRouteWidgetList(sectionIndex), child: scaffold);
-    // Container(
-    //   child: scaffold,
-    // );
   }
 }

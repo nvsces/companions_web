@@ -1,10 +1,8 @@
 import 'package:companions_web/models/listTrip/abstractList.dart';
 import 'package:companions_web/models/trip.dart';
-import 'package:companions_web/models/user.dart';
-import 'package:companions_web/screens/detail_trip.dart';
 import 'package:companions_web/services/database.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:companions_web/screens/edit_trip.dart';
 
 class Trip_Pen_Zem extends StatefulWidget {
   Trip_Pen_Zem({Key key}) : super(key: key);
@@ -49,6 +47,10 @@ class _Trip_Pen_ZemState extends State<Trip_Pen_Zem> with AbsctractList {
 
   @override
   void editTrip(Trip trip) {
-    //
+    int sectionIndex = getRouteInSectiomIndex(trip.route);
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (ctx) => EditTrip(sectionIndex, initialTrip: trip)));
   }
 }

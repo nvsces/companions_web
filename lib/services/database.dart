@@ -41,6 +41,13 @@ class DatabaseService {
     return await _doc.set(trip.toMap());
   }
 
+  Future editTrip(Trip trip, String route, String docPath) async {
+    _routeCollection = getRouteCollction(route);
+    var _doc = _routeCollection.doc(docPath);
+    trip.docPath = docPath;
+    return await _doc.update(trip.toMap());
+  }
+
   Future deleteTrip(String pathDoc, String route) async {
     _routeCollection = getRouteCollction(route);
     return await _routeCollection.doc(pathDoc).delete();

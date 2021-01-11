@@ -22,19 +22,34 @@ class DetailTrip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Поездка')),
-      body: Center(
-          child: Column(
-        children: <Widget>[
-          getImageGroup(trip.group),
-          Text(trip.route, style: TextStyle(fontSize: 30)),
-          Text(trip.time, style: TextStyle(fontSize: 30)),
-          Text('Количество мест: ' + trip.seats,
-              style: TextStyle(fontSize: 30)),
-          Text(trip.group, style: TextStyle(fontSize: 30)),
-          Text('Номер телефона: ' + trip.phone, style: TextStyle(fontSize: 30)),
-        ],
-      )),
-    );
+        appBar: AppBar(title: Text('Поездка')),
+        body: Center(
+            child: CustomScrollView(slivers: <Widget>[
+          SliverList(
+            delegate: SliverChildBuilderDelegate((context, int) {
+              return Column(children: <Widget>[
+                getImageGroup(trip.group),
+                Text(trip.route,
+                    style: TextStyle(fontSize: 30),
+                    textAlign: TextAlign.center),
+                Text(trip.time,
+                    style: TextStyle(fontSize: 30),
+                    textAlign: TextAlign.center),
+                Text('Количесто мест: ' + trip.seats,
+                    style: TextStyle(fontSize: 30),
+                    textAlign: TextAlign.center),
+                Text(trip.group,
+                    style: TextStyle(fontSize: 30),
+                    textAlign: TextAlign.center),
+                Text('Номер телефона: ' + trip.phone,
+                    style: TextStyle(fontSize: 30),
+                    textAlign: TextAlign.center),
+                Text(trip.comment,
+                    style: TextStyle(fontSize: 30),
+                    textAlign: TextAlign.center),
+              ]);
+            }, childCount: 1),
+          )
+        ])));
   }
 }

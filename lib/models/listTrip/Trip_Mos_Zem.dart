@@ -1,5 +1,6 @@
 import 'package:companions_web/models/listTrip/abstractList.dart';
 import 'package:companions_web/models/trip.dart';
+import 'package:companions_web/screens/edit_trip.dart';
 import 'package:companions_web/services/database.dart';
 import 'package:flutter/material.dart';
 
@@ -44,6 +45,10 @@ class _Trip_Mos_ZemState extends State<Trip_Mos_Zem> with AbsctractList {
 
   @override
   void editTrip(Trip trip) {
-    //
+    int sectionIndex = getRouteInSectiomIndex(trip.route);
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (ctx) => EditTrip(sectionIndex, initialTrip: trip)));
   }
 }

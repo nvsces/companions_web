@@ -4,6 +4,7 @@ import 'package:companions_web/screens/detail_trip.dart';
 import 'package:companions_web/screens/sidable.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:companions_web/services/const.dart';
 import 'package:provider/provider.dart';
 
 mixin AbsctractList {
@@ -30,6 +31,25 @@ mixin AbsctractList {
       return Colors.blue;
     else
       return Colors.green;
+  }
+
+  int getRouteInSectiomIndex(String route) {
+    switch (route) {
+      case PenZem:
+        return 0;
+        break;
+      case ZemPen:
+        return 1;
+        break;
+      case ZemMos:
+        return 2;
+        break;
+      case MosZem:
+        return 3;
+        break;
+      default:
+        return 0;
+    }
   }
 
   Color getColorCard(Trip trip) {

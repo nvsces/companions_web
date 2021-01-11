@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:companions_web/models/trip.dart';
 import 'package:companions_web/models/user.dart';
 import 'package:companions_web/services/database.dart';
@@ -23,6 +25,7 @@ class _AddTripState extends State<AddTrip> {
   Trip trip = Trip();
   myUser user;
   String route;
+  String buttonName = "Добавить поездку";
 
   String getRouteName(int index) {
     switch (index) {
@@ -70,7 +73,6 @@ class _AddTripState extends State<AddTrip> {
   }
 
   void _saveTrip() async {
-    //print(workout.toMap());
     if (trip.phone == null || trip.seats == null || trip.time == null) {
       print('tost show');
       Fluttertoast.showToast(
@@ -86,9 +88,19 @@ class _AddTripState extends State<AddTrip> {
         trip.author = user.id;
       }
       trip.route = getRouteName(widget.sectionIndex);
+      if (trip.comment == null) trip.comment = '';
       await DatabaseService().addTrip(trip, route);
       Navigator.of(context).pop();
     }
+  }
+
+  DateTime stringToDataTime(String time) {
+    var dd = int.parse(time.substring(0, 2));
+    var mm = int.parse(time.substring(3, 5));
+    var yyyy = int.parse(time.substring(6, 10));
+
+    DateTime dataTime = DateTime(yyyy, mm, dd);
+    return dataTime;
   }
 
   String toTime(dynamic data) {
@@ -177,7 +189,6 @@ class _AddTripState extends State<AddTrip> {
                   },
                 ),
                 FormBuilderTextField(
-                  initialValue: "тестовый текст",
                   keyboardType: TextInputType.text,
                   attribute: 'comment',
                   decoration: InputDecoration(
@@ -193,7 +204,7 @@ class _AddTripState extends State<AddTrip> {
                   splashColor: Theme.of(context).primaryColor,
                   highlightColor: Theme.of(context).primaryColor,
                   color: Colors.white,
-                  child: Text('Добавить поездку',
+                  child: Text(buttonName,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Theme.of(context).primaryColor,
