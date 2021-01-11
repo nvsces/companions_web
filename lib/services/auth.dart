@@ -26,7 +26,7 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
     AuthService().persistens();
     Widget _logo() {
       return Padding(
-          padding: EdgeInsets.only(top: 100),
+          padding: EdgeInsets.only(top: 50),
           child: Container(
               child: Align(
                   child: Text('Попутчики Земетчино',
@@ -82,6 +82,7 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
     Widget _form(String label, void func()) {
       return Container(
         child: Column(
+          mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             Padding(
                 padding: EdgeInsets.only(bottom: 20, top: 10),
