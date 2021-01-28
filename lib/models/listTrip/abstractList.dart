@@ -148,18 +148,19 @@ mixin AbsctractList {
   Widget buildAbsrtactList(BuildContext context) {
     user = Provider.of<myUser>(context);
     return trips.length != 0
-        ? Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            child: Expanded(
-              child: ListView.builder(
-                  padding: EdgeInsets.all(20),
-                  itemCount: trips.length,
-                  itemBuilder: (context, i) {
-                    return getListCard(context, trips[i]);
-                  }),
-            ),
-          )
+        ? Text(trips.length.toString())
+        // Container(
+        //     height: MediaQuery.of(context).size.height,
+        //     width: MediaQuery.of(context).size.width,
+        //     child: Expanded(
+        //       child: ListView.builder(
+        //           padding: EdgeInsets.all(20),
+        //           itemCount: trips.length,
+        //           itemBuilder: (context, i) {
+        //             return getListCard(context, trips[i]);
+        //           }),
+        //     ),
+        //   )
         : Center(child: Text('Поездок нет'));
   }
 }

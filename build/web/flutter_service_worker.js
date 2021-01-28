@@ -287,9 +287,9 @@ const RESOURCES = {
 "icons/Icon-72.png": "9b629b514666523b111ac1aeab074aee",
 "icons/Icon-76.png": "28d5433939c4bbd4c439c55a8f90db4e",
 "icons/Icon-96.png": "f4426d62eadf88c56b46b83eee0b982a",
-"index.html": "235078cd77f1f523cb80cd2b084364d6",
-"/": "235078cd77f1f523cb80cd2b084364d6",
-"main.dart.js": "812f62ef1573c9135ec560b3589f4c1c",
+"index.html": "3f676cd7573ffd4ddbf36faac3bc8307",
+"/": "3f676cd7573ffd4ddbf36faac3bc8307",
+"main.dart.js": "af7d8b332537522218e05681694cd46f",
 "manifest.json": "15791d441d4bbbe92bc0be8247ecc4d0",
 "version.json": "363977d80afcd52113ab8a6210d88759",
 "web.rar": "36678d839f16503570f7eea3a4bdfbf4"
