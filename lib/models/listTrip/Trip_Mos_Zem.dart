@@ -13,6 +13,7 @@ class Trip_Mos_Zem extends StatefulWidget {
 
 class _Trip_Mos_ZemState extends State<Trip_Mos_Zem> with AbsctractList {
   DatabaseService db = DatabaseService();
+  List<Trip> trips = [];
   String route = 'Mos_Zem';
 
   @override

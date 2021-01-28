@@ -12,7 +12,8 @@ class Trip_Zem_Mos extends StatefulWidget {
 }
 
 class _Trip_Zem_MosState extends State<Trip_Zem_Mos> with AbsctractList {
-  var trips = List<Trip>();
+  //var trips = List<Trip>();
+  List<Trip> trips = [];
 
   DatabaseService db = DatabaseService();
   String route = 'Zem_Mos';

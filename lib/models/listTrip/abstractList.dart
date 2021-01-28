@@ -7,7 +7,7 @@ import 'package:companions_web/services/const.dart';
 import 'package:provider/provider.dart';
 
 mixin AbsctractList {
-  var trips = List<Trip>();
+  List<Trip> trips;
 
   myUser user;
 
@@ -117,10 +117,10 @@ mixin AbsctractList {
 
   Widget listCardSlidable(BuildContext context, Trip trip) {
     return Card(
-        elevation: 30,
+        //elevation: 30,
         // shadowColor: Colors.redAccent,
-        margin: EdgeInsets.symmetric(vertical: 7),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        // margin: EdgeInsets.symmetric(vertical: 7),
+        // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         color: getColorCard(trip),
         child: SlidableWidget(
             onDismissed: (action) => dismissSlidableItem(action, trip),
@@ -145,23 +145,26 @@ mixin AbsctractList {
       return listCard(context, trip);
   }
 
+  Widget isData(BuildContext context) {
+    if (trips.length > 0) {
+      return Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: Expanded(
+          child: ListView.builder(
+              padding: EdgeInsets.all(20),
+              itemCount: trips.length,
+              itemBuilder: (context, i) {
+                return getListCard(context, trips[i]);
+              }),
+        ),
+      );
+    } else
+      return Center(child: Text('Поездок нет'));
+  }
+
   Widget buildAbsrtactList(BuildContext context) {
     user = Provider.of<myUser>(context);
-    return trips.length != 0
-        ?
-        //Text(trips.length.toString())
-        Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            child: Expanded(
-              child: ListView.builder(
-                  padding: EdgeInsets.all(20),
-                  itemCount: trips.length,
-                  itemBuilder: (context, i) {
-                    return getListCard(context, trips[i]);
-                  }),
-            ),
-          )
-        : Center(child: Text('Поездок нет'));
+    return isData(context);
   }
 }
