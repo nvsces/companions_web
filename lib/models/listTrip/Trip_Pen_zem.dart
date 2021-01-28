@@ -12,7 +12,7 @@ class Trip_Pen_Zem extends StatefulWidget {
 }
 
 class _Trip_Pen_ZemState extends State<Trip_Pen_Zem> with AbsctractList {
-  List<Trip> trips = [];
+  var trips = List<Trip>();
 
   DatabaseService db = DatabaseService();
   String route = 'Pen_Zem';

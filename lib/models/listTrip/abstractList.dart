@@ -7,7 +7,7 @@ import 'package:companions_web/services/const.dart';
 import 'package:provider/provider.dart';
 
 mixin AbsctractList {
-  List<Trip> trips;
+  var trips = List<Trip>();
 
   myUser user;
 
