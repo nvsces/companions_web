@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
 
   AppBar buildAppBar(bool isLogged) {
     return AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Colors.orange,
         centerTitle: true,
         title: Text(
           'Попутики в Земетчино',
@@ -101,7 +101,7 @@ class _HomePageState extends State<HomePage> {
         ],
         index: 0,
         height: 50,
-        color: Theme.of(context).primaryColor,
+        color: Colors.orange,
         buttonBackgroundColor: Colors.white,
         backgroundColor: Colors.white.withOpacity(0.5),
         animationCurve: Curves.easeOutQuint,

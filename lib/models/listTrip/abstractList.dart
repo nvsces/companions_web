@@ -117,10 +117,10 @@ mixin AbsctractList {
 
   Widget listCardSlidable(BuildContext context, Trip trip) {
     return Card(
-        //elevation: 30,
-        // shadowColor: Colors.redAccent,
-        // margin: EdgeInsets.symmetric(vertical: 7),
-        // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        elevation: 30,
+        //shadowColor: Colors.redAccent,
+        margin: EdgeInsets.symmetric(vertical: 7),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         color: getColorCard(trip),
         child: SlidableWidget(
             onDismissed: (action) => dismissSlidableItem(action, trip),
@@ -147,17 +147,16 @@ mixin AbsctractList {
 
   Widget isData(BuildContext context) {
     if (trips.length > 0) {
+      //return Text(trips.length.toString());
       return Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        child: Expanded(
-          child: ListView.builder(
-              padding: EdgeInsets.all(20),
-              itemCount: trips.length,
-              itemBuilder: (context, i) {
-                return getListCard(context, trips[i]);
-              }),
-        ),
+        child: ListView.builder(
+            padding: EdgeInsets.all(20),
+            itemCount: trips.length,
+            itemBuilder: (context, i) {
+              return getListCard(context, trips[i]);
+            }),
       );
     } else
       return Center(child: Text('Поездок нет'));
