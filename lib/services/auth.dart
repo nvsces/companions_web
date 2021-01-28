@@ -156,44 +156,12 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 _buildlogo(),
-                // SizedBox(height: 100),
-                (showLogin
-                    ? Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: <Widget>[
-                          _form('ВОЙТИ', _loginButtonAction),
-                          Padding(
-                            padding: EdgeInsets.all(10),
-                            child: GestureDetector(
-                                child: Text('Регистрация!',
-                                    style: TextStyle(
-                                        fontSize: 20, color: Colors.white)),
-                                onTap: () {
-                                  setState(() {
-                                    showLogin = false;
-                                  });
-                                }),
-                          )
-                        ],
-                      )
-                    : Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: <Widget>[
-                          _form('ЗАРЕГИСТРИРОВАТЬСЯ', _registrButtonAction),
-                          Padding(
-                            padding: EdgeInsets.all(10),
-                            child: GestureDetector(
-                                child: Text('Уже зарегистрированы? Войдите!',
-                                    style: TextStyle(
-                                        fontSize: 20, color: Colors.white)),
-                                onTap: () {
-                                  setState(() {
-                                    showLogin = true;
-                                  });
-                                }),
-                          )
-                        ],
-                      ))
+                Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    _form('ВОЙТИ', _loginButtonAction),
+                  ],
+                )
               ],
             )));
   }

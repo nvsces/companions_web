@@ -45,7 +45,7 @@ class DetailTrip extends StatelessWidget {
                     style: TextStyle(fontSize: 30),
                     textAlign: TextAlign.center),
                 Text(trip.comment,
-                    style: TextStyle(fontSize: 30),
+                    style: TextStyle(fontSize: 20),
                     textAlign: TextAlign.center),
               ]);
             }, childCount: 1),

@@ -1,10 +1,10 @@
-import 'dart:html';
+//import 'dart:html';
 
 import 'package:companions_web/models/trip.dart';
 import 'package:companions_web/models/user.dart';
 import 'package:companions_web/services/const.dart';
 import 'package:companions_web/services/database.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';

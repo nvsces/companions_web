@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase/firebase.dart' as firebase;
+//import 'package:firebase/firebase.dart' as firebase;
 
 // ignore: camel_case_types
 class myUser {
@@ -9,7 +9,7 @@ class myUser {
     id = user.uid;
   }
   // for web
-  myUser.fromFirebaseUser(firebase.User user) {
-    id = user.uid;
-  }
+  // myUser.fromFirebaseUser(firebase.User user) {
+  //   id = user.uid;
+  // }
 }
