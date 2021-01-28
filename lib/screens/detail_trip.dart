@@ -26,7 +26,7 @@ class DetailTrip extends StatelessWidget {
         body: Center(
             child: CustomScrollView(slivers: <Widget>[
           SliverList(
-            delegate: SliverChildBuilderDelegate((context, int) {
+            delegate: SliverChildBuilderDelegate((context, int i) {
               return Column(children: <Widget>[
                 getImageGroup(trip.group),
                 Text(trip.route,

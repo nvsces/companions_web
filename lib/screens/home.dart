@@ -62,20 +62,17 @@ class _HomePageState extends State<HomePage> {
 
   AppBar buildAppBar(bool isLogged) {
     return AppBar(
-        backgroundColor: Colors.white,
-        leading: Image.asset(
-          'assets/images/dse.jpg',
-          scale: 2,
-        ),
-        // On Android by default its false
+        backgroundColor: Theme.of(context).primaryColor,
         centerTitle: true,
-        title: Image.asset("assets/images/olen.png"),
+        title: Text(
+          'Попутики в Земетчино',
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        ),
         actions: <Widget>[
           isLogged
               ? FlatButton.icon(
                   onPressed: () => AuthService().logOut(),
-                  icon: Icon(Icons.supervised_user_circle,
-                      color: Theme.of(context).primaryColor),
+                  icon: Icon(Icons.supervised_user_circle, color: Colors.white),
                   label: Text('Выход'),
                 )
               : FlatButton.icon(
@@ -85,8 +82,7 @@ class _HomePageState extends State<HomePage> {
                         MaterialPageRoute(
                             builder: (ctx) => AuthorizationPage()));
                   },
-                  icon: Icon(Icons.supervised_user_circle,
-                      color: Theme.of(context).primaryColor),
+                  icon: Icon(Icons.supervised_user_circle, color: Colors.white),
                   label: Text('Вход'),
                 )
         ]);

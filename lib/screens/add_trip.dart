@@ -3,7 +3,6 @@ import 'dart:html';
 import 'package:companions_web/models/trip.dart';
 import 'package:companions_web/models/user.dart';
 import 'package:companions_web/services/database.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
@@ -118,102 +117,134 @@ class _AddTripState extends State<AddTrip> {
         appBar: AppBar(
           title: Text('Создание поездки'),
         ),
-        body: Container(
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(color: Colors.white),
-            child: FormBuilder(
-              key: _formKey,
-              child: Column(children: <Widget>[
-                Text(
-                  getRouteName(widget.sectionIndex),
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                FormBuilderDateTimePicker(
-                  // onChanged: _onChanged,
-                  inputType: InputType.date,
-                  format: DateFormat('dd-MM-yyyy'),
-                  decoration: InputDecoration(
-                    labelText: 'Дата поездки',
-                  ),
-                  onChanged: (dynamic val) {
-                    setState(() {
-                      trip.time = toTime(val);
-                    });
-                  },
-                  initialTime: TimeOfDay(hour: 8, minute: 0), attribute: '',
-                  // initialValue: DateTime.now(),
-                  // enabled: true,
-                ),
-                FormBuilderTextField(
-                  keyboardType: TextInputType.phone,
-                  attribute: 'Номер телефона',
-                  decoration: InputDecoration(
-                    labelText: "Номер телефона",
-                  ),
-                  maxLength: 11,
-                  onChanged: (dynamic val) {
-                    setState(() {
-                      trip.phone = val;
-                    });
-                  },
-                ),
-                FormBuilderDropdown(
-                  attribute: "",
-                  initialValue: 'Водитель',
-                  allowClear: false,
-                  hint: Text('Группа'),
-                  onChanged: (dynamic val) {
-                    setState(() {
-                      trip.group = val;
-                    });
-                  },
-                  validators: [FormBuilderValidators.required()],
-                  items: <String>['Водитель', 'Пассажир']
-                      .map((level) => DropdownMenuItem(
-                            value: level,
-                            child: Text('$level'),
+        body: CustomScrollView(slivers: <Widget>[
+          SliverList(
+              delegate: SliverChildBuilderDelegate((context, int i) {
+            return Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(color: Colors.white),
+                child: FormBuilder(
+                    key: _formKey,
+                    child: Column(children: <Widget>[
+                      Text(
+                        getRouteName(widget.sectionIndex),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      Card(
+                        margin: EdgeInsets.all(10),
+                        child: FormBuilderDateTimePicker(
+                          // onChanged: _onChanged,
+                          inputType: InputType.date,
+                          format: DateFormat('dd-MM-yyyy'),
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Дата поездки',
+                          ),
+                          onChanged: (dynamic val) {
+                            setState(() {
+                              trip.time = toTime(val);
+                            });
+                          },
+                          initialTime: TimeOfDay(hour: 8, minute: 0),
+                          attribute: '',
+                          // initialValue: DateTime.now(),
+                          // enabled: true,
+                        ),
+                      ),
+                      Card(
+                        margin: EdgeInsets.all(10),
+                        child: FormBuilderTextField(
+                          keyboardType: TextInputType.phone,
+                          attribute: 'Номер телефона',
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: "Номер телефона",
+                          ),
+                          maxLength: 11,
+                          onChanged: (dynamic val) {
+                            setState(() {
+                              trip.phone = val;
+                            });
+                          },
+                        ),
+                      ),
+                      Card(
+                        margin: EdgeInsets.all(10),
+                        child: FormBuilderDropdown(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                          ),
+                          attribute: "",
+                          initialValue: 'Водитель',
+                          allowClear: false,
+                          hint: Text('Группа'),
+                          onChanged: (dynamic val) {
+                            setState(() {
+                              trip.group = val;
+                            });
+                          },
+                          validators: [FormBuilderValidators.required()],
+                          items: <String>['Водитель', 'Пассажир']
+                              .map((level) => DropdownMenuItem(
+                                    value: level,
+                                    child: Text('$level'),
+                                  ))
+                              .toList(),
+                        ),
+                      ),
+                      Card(
+                        margin: EdgeInsets.all(10),
+                        child: FormBuilderTextField(
+                          keyboardType: TextInputType.number,
+                          attribute: 'seats',
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: "Количество мест",
+                          ),
+                          maxLength: 1,
+                          onChanged: (dynamic val) {
+                            setState(() {
+                              trip.seats = val;
+                            });
+                          },
+                        ),
+                      ),
+                      Card(
+                        margin: EdgeInsets.all(10),
+                        child: FormBuilderTextField(
+                          maxLines: 3,
+                          keyboardType: TextInputType.multiline,
+                          attribute: 'comment',
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: "Комментарий (не обязательно)",
+                          ),
+                          onChanged: (dynamic val) {
+                            setState(() {
+                              trip.comment = val;
+                            });
+                          },
+                        ),
+                      ),
+                      Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12)),
+                          child: RaisedButton(
+                            splashColor: Theme.of(context).primaryColor,
+                            highlightColor: Theme.of(context).primaryColor,
+                            color: Colors.white,
+                            child: Text(buttonName,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Theme.of(context).primaryColor,
+                                    fontSize: 20)),
+                            onPressed: () {
+                              _saveTrip();
+                            },
                           ))
-                      .toList(),
-                ),
-                FormBuilderTextField(
-                  keyboardType: TextInputType.number,
-                  attribute: 'seats',
-                  decoration: InputDecoration(
-                    labelText: "Количество мест",
-                  ),
-                  maxLength: 11,
-                  onChanged: (dynamic val) {
-                    setState(() {
-                      trip.seats = val;
-                    });
-                  },
-                ),
-                FormBuilderTextField(
-                  keyboardType: TextInputType.text,
-                  attribute: 'comment',
-                  decoration: InputDecoration(
-                    labelText: "Комментарий (не обязательно)",
-                  ),
-                  onChanged: (dynamic val) {
-                    setState(() {
-                      trip.comment = val;
-                    });
-                  },
-                ),
-                RaisedButton(
-                  splashColor: Theme.of(context).primaryColor,
-                  highlightColor: Theme.of(context).primaryColor,
-                  color: Colors.white,
-                  child: Text(buttonName,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).primaryColor,
-                          fontSize: 20)),
-                  onPressed: () {
-                    _saveTrip();
-                  },
-                )
-              ]),
-            )));
+                    ])));
+          }, childCount: 1))
+        ]));
   }
 }

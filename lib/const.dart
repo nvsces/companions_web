@@ -1,1 +1,0 @@
-final String main_title="Попутчики в Земетчино";

@@ -3,7 +3,6 @@ import 'package:companions_web/models/user.dart';
 import 'package:companions_web/screens/detail_trip.dart';
 import 'package:companions_web/screens/sidable.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:companions_web/services/const.dart';
 import 'package:provider/provider.dart';
 
@@ -118,6 +117,10 @@ mixin AbsctractList {
 
   Widget listCardSlidable(BuildContext context, Trip trip) {
     return Card(
+        elevation: 30,
+        // shadowColor: Colors.redAccent,
+        margin: EdgeInsets.symmetric(vertical: 7),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         color: getColorCard(trip),
         child: SlidableWidget(
             onDismissed: (action) => dismissSlidableItem(action, trip),
@@ -125,7 +128,13 @@ mixin AbsctractList {
   }
 
   Widget listCard(BuildContext context, Trip trip) {
-    return Card(color: getColorCard(trip), child: buildListTile(context, trip));
+    return Card(
+        elevation: 30,
+        //shadowColor: Colors.redAccent,
+        margin: EdgeInsets.symmetric(vertical: 7),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        color: getColorCard(trip),
+        child: buildListTile(context, trip));
   }
 
   Widget getListCard(BuildContext context, Trip trip) {
@@ -138,14 +147,19 @@ mixin AbsctractList {
 
   Widget buildAbsrtactList(BuildContext context) {
     user = Provider.of<myUser>(context);
-    return Container(
-      child: Container(
-        child: ListView.builder(
-            itemCount: trips.length,
-            itemBuilder: (context, i) {
-              return getListCard(context, trips[i]);
-            }),
-      ),
-    );
+    return trips.length != 0
+        ? Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            child: Expanded(
+              child: ListView.builder(
+                  padding: EdgeInsets.all(20),
+                  itemCount: trips.length,
+                  itemBuilder: (context, i) {
+                    return getListCard(context, trips[i]);
+                  }),
+            ),
+          )
+        : Center(child: Text('Поездок нет'));
   }
 }

@@ -29,7 +29,7 @@ class SlidableWidget<T> extends StatelessWidget {
         /// right side
         secondaryActions: <Widget>[
           IconSlideAction(
-            caption: 'Delete',
+            caption: 'Удалить',
             color: Colors.red,
             icon: Icons.delete,
             onTap: () => onDismissed(SlidableAction.delete),
