@@ -7,6 +7,7 @@ class Trip {
   String group;
   String author;
   String docPath;
+  String name;
   String comment = "";
 
   Trip(
@@ -14,6 +15,7 @@ class Trip {
       this.route,
       this.time,
       this.seats,
+      this.name,
       this.phone,
       this.group,
       this.author,
@@ -25,6 +27,7 @@ class Trip {
     route = data['route'];
     time = data['time'];
     seats = data['seats'];
+    name = data['name'];
     phone = data['phone'];
     group = data['group'];
     author = data['author'];
@@ -37,6 +40,7 @@ class Trip {
       'route': route,
       'time': time,
       'seats': seats,
+      'name': name,
       'phone': phone,
       'group': group,
       'author': author,

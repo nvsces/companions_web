@@ -56,7 +56,7 @@ mixin AbsctractList {
       return getColorGroup(trip.group);
     else {
       if (user.id == trip.author)
-        return Colors.orange;
+        return Colors.orange[54];
       else
         return getColorGroup(trip.group);
     }
@@ -117,7 +117,7 @@ mixin AbsctractList {
 
   Widget listCardSlidable(BuildContext context, Trip trip) {
     return Card(
-        elevation: 30,
+        elevation: 10,
         //shadowColor: Colors.redAccent,
         margin: EdgeInsets.symmetric(vertical: 7),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -128,13 +128,16 @@ mixin AbsctractList {
   }
 
   Widget listCard(BuildContext context, Trip trip) {
-    return Card(
-        elevation: 30,
-        //shadowColor: Colors.redAccent,
-        margin: EdgeInsets.symmetric(vertical: 7),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        color: getColorCard(trip),
-        child: buildListTile(context, trip));
+    return Container(
+        margin: EdgeInsets.all(7),
+        decoration: BoxDecoration(),
+        child: Card(
+          margin: EdgeInsets.symmetric(vertical: 7),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          color: getColorCard(trip),
+          child: buildListTile(context, trip),
+        ));
   }
 
   Widget getListCard(BuildContext context, Trip trip) {
@@ -159,7 +162,11 @@ mixin AbsctractList {
             }),
       );
     } else
-      return Center(child: Text('Поездок нет'));
+      return Center(
+          child: Text(
+        'Поездок нет',
+        style: TextStyle(fontSize: 30),
+      ));
   }
 
   Widget buildAbsrtactList(BuildContext context) {

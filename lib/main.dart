@@ -2,7 +2,6 @@ import 'package:companions_web/generated/l10n.dart';
 import 'package:companions_web/models/user.dart';
 import 'package:companions_web/screens/home.dart';
 import 'package:companions_web/services/auth.dart';
-//import 'package:companions_web/services/auth_firebase.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

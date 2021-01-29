@@ -66,14 +66,17 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         title: Text(
           'Попутики в Земетчино',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         actions: <Widget>[
           isLogged
               ? FlatButton.icon(
                   onPressed: () => AuthService().logOut(),
                   icon: Icon(Icons.supervised_user_circle, color: Colors.white),
-                  label: Text('Выход'),
+                  label: Text(
+                    'Выход',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 )
               : FlatButton.icon(
                   onPressed: () {
@@ -83,7 +86,10 @@ class _HomePageState extends State<HomePage> {
                             builder: (ctx) => AuthorizationPage()));
                   },
                   icon: Icon(Icons.supervised_user_circle, color: Colors.white),
-                  label: Text('Вход'),
+                  label: Text(
+                    'Вход',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 )
         ]);
   }

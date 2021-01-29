@@ -1,10 +1,10 @@
-//import 'dart:html';
+import 'dart:html';
 
 import 'package:companions_web/models/trip.dart';
 import 'package:companions_web/models/user.dart';
 import 'package:companions_web/services/const.dart';
 import 'package:companions_web/services/database.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
@@ -76,7 +76,10 @@ class _EditTripState extends State<EditTrip> {
   }
 
   void _saveTrip() async {
-    if (trip.phone == null || trip.seats == null || trip.time == null) {
+    if (trip.phone == null ||
+        trip.seats == null ||
+        trip.time == null ||
+        trip.name == null) {
       print('tost show');
       Fluttertoast.showToast(
           msg: "Заполните все поля",
@@ -114,7 +117,8 @@ class _EditTripState extends State<EditTrip> {
     user = Provider.of<myUser>(context);
     return Scaffold(
         appBar: AppBar(
-          title: Text('Создание поездки'),
+          backgroundColor: Colors.orange,
+          title: Text('Редактирование поездки'),
         ),
         body: CustomScrollView(slivers: <Widget>[
           SliverList(
@@ -155,24 +159,6 @@ class _EditTripState extends State<EditTrip> {
                       ),
                       Card(
                         margin: EdgeInsets.all(10),
-                        child: FormBuilderTextField(
-                          initialValue: widget.initialTrip.phone,
-                          keyboardType: TextInputType.phone,
-                          attribute: 'Номер телефона',
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: "Номер телефона",
-                          ),
-                          maxLength: 11,
-                          onChanged: (dynamic val) {
-                            setState(() {
-                              trip.phone = val;
-                            });
-                          },
-                        ),
-                      ),
-                      Card(
-                        margin: EdgeInsets.all(10),
                         child: FormBuilderDropdown(
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
@@ -193,6 +179,41 @@ class _EditTripState extends State<EditTrip> {
                                     child: Text('$level'),
                                   ))
                               .toList(),
+                        ),
+                      ),
+                      Card(
+                        margin: EdgeInsets.all(10),
+                        child: FormBuilderTextField(
+                          initialValue: widget.initialTrip.name,
+                          keyboardType: TextInputType.text,
+                          attribute: 'Имя',
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: "Ваше имя",
+                          ),
+                          onChanged: (dynamic val) {
+                            setState(() {
+                              trip.name = val;
+                            });
+                          },
+                        ),
+                      ),
+                      Card(
+                        margin: EdgeInsets.all(10),
+                        child: FormBuilderTextField(
+                          initialValue: widget.initialTrip.phone,
+                          keyboardType: TextInputType.phone,
+                          attribute: 'Номер телефона',
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: "Номер телефона",
+                          ),
+                          maxLength: 11,
+                          onChanged: (dynamic val) {
+                            setState(() {
+                              trip.phone = val;
+                            });
+                          },
                         ),
                       ),
                       Card(
@@ -231,22 +252,25 @@ class _EditTripState extends State<EditTrip> {
                           },
                         ),
                       ),
-                      Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12)),
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
                           child: RaisedButton(
-                            splashColor: Theme.of(context).primaryColor,
-                            highlightColor: Theme.of(context).primaryColor,
-                            color: Colors.white,
-                            child: Text(buttonName,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5))),
+                              child: Text(
+                                buttonName,
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Theme.of(context).primaryColor,
-                                    fontSize: 20)),
-                            onPressed: () {
-                              _saveTrip();
-                            },
-                          ))
+                                    color: Colors.black, fontSize: 30),
+                              ),
+                              color: Colors.orange,
+                              onPressed: () {
+                                _saveTrip();
+                              }),
+                        ),
+                      )
                     ])));
           }, childCount: 1))
         ]));
