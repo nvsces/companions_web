@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.orange,
         centerTitle: true,
         title: Text(
-          'Попутики в Земетчино',
+          'Попутчики Земетчино',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         actions: <Widget>[

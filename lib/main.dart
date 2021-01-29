@@ -6,7 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'services/auth_services.dart';
+import 'services/auth_firebase.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,11 +18,11 @@ class CompanionsApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<myUser>.value(
-        value: AuthService().currentUser,
+        value: AuthFirebase().currentUser,
         child: MaterialApp(
             supportedLocales: S.delegate.supportedLocales,
             debugShowCheckedModeBanner: false,
-            title: 'Попутчики в Земетчино',
+            title: 'Попутчики Земетчино',
             theme: ThemeData(
                 primaryColor: Color.fromRGBO(230, 148, 46, 1),
                 textTheme: TextTheme(title: TextStyle(color: Colors.white))),

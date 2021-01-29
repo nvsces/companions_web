@@ -148,7 +148,7 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
     AuthService().persistens();
 
     return Scaffold(
-        appBar: AppBar(title: Text('Аунтефикация')),
+        appBar: AppBar(title: Text('Аутентификация')),
         backgroundColor: Theme.of(context).primaryColor,
         body: SizedBox(
             height: MediaQuery.of(context).size.height,

@@ -165,7 +165,7 @@ mixin AbsctractList {
       return Center(
           child: Text(
         'Поездок нет',
-        style: TextStyle(fontSize: 30),
+        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
       ));
   }
 
