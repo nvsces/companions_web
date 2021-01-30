@@ -258,7 +258,7 @@ class _AddTripState extends State<AddTrip> {
                               child: Text(
                                 buttonName,
                                 style: TextStyle(
-                                    color: Colors.black, fontSize: 30),
+                                    color: Colors.black, fontSize: 15),
                               ),
                               color: Colors.orange,
                               onPressed: () {
