@@ -101,7 +101,7 @@ class DetailTrip extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(5))),
               child: Text(
                 'Вернуться назад',
-                style: TextStyle(color: Colors.black, fontSize: 30),
+                style: TextStyle(color: Colors.black, fontSize: 15),
               ),
               color: Colors.white,
               onPressed: () {
