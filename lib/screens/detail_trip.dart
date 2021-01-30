@@ -1,10 +1,20 @@
 import 'package:companions_web/models/trip.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailTrip extends StatelessWidget {
   final Trip trip;
 
   const DetailTrip(@required this.trip, {Key key}) : super(key: key);
+
+  launchURL() async {
+    const url = 'https://vk.com/id510476975';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   Widget getImageGroup(String group) {
     if (group == 'Водитель')
@@ -66,10 +76,15 @@ class DetailTrip extends StatelessWidget {
                           fontWeight: FontWeight.bold),
                     ),
                     Text(trip.name),
-                    Text(
-                      'Номер телефона',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    GestureDetector(
+                      onTap: () async {
+                        launchURL();
+                      },
+                      child: Text(
+                        'Номер телефона',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
                     ),
                     Text(trip.phone)
                   ],
