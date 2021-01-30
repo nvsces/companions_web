@@ -4,10 +4,10 @@ import 'package:companions_web/models/listTrip/Trip_Zem_Mos.dart';
 import 'package:companions_web/models/listTrip/Trip_Zem_Pen.dart';
 import 'package:companions_web/models/user.dart';
 import 'package:companions_web/screens/add_trip.dart';
-import 'package:companions_web/screens/test_url.dart';
 import 'package:companions_web/services/auth.dart';
 import 'package:companions_web/services/auth_services.dart';
 import 'package:companions_web/services/const.dart';
+import 'package:companions_web/services/database.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,8 +20,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  DatabaseService db = DatabaseService();
   int sectionIndex = 0;
   String route = PenZem;
+  String vkUrl = "";
+
+  loadUrl(myUser user) async {
+    var stream = db.getVkUrl(user.id);
+    stream.listen((String data) {
+      setState(() {
+        vkUrl = data;
+      });
+    });
+  }
 
   String getRouteWidgetList(int itemIndex) {
     switch (itemIndex) {
@@ -100,6 +111,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final myUser user = Provider.of<myUser>(context);
     final bool isLoggedIn = user != null;
+    loadUrl(user);
     CurvedNavigationBar navigationBar = CurvedNavigationBar(
         items: const <Widget>[
           Text('Пен-Зем'),
@@ -131,8 +143,10 @@ class _HomePageState extends State<HomePage> {
               backgroundColor: Colors.white,
               foregroundColor: Theme.of(context).primaryColor,
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (ctx) => AddTrip(sectionIndex)));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (ctx) => AddTrip(sectionIndex, vkUrl)));
               },
             )
           : SizedBox(),

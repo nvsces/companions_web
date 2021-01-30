@@ -14,6 +14,9 @@ class DatabaseService {
 
   CollectionReference _routeCollection;
 
+  CollectionReference _authCollection =
+      FirebaseFirestore.instance.collection('AUTH');
+
   CollectionReference getRouteCollction(String route) {
     switch (route) {
       case PenZem:
@@ -33,12 +36,28 @@ class DatabaseService {
     }
   }
 
+  Future setVkUrl(String authId, String url) async {
+    Map<String, dynamic> map = {'vkurl': url};
+    return await _authCollection.doc(authId).set(map);
+  }
+
   Future addTrip(Trip trip, String route) async {
     _routeCollection = getRouteCollction(route);
     var _doc = _routeCollection.doc();
     var pathDoc = _doc.id;
     trip.docPath = pathDoc;
     return await _doc.set(trip.toMap());
+  }
+
+  String maptoString(Map<String, dynamic> map) {
+    return map['vkurl'];
+  }
+
+  Stream<String> getVkUrl(String authId) {
+    var doc = _authCollection.doc(authId);
+    return doc
+        .snapshots()
+        .map((DocumentSnapshot doc) => maptoString(doc.data()));
   }
 
   Future editTrip(Trip trip, String route, String docPath) async {

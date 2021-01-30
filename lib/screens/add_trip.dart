@@ -3,6 +3,7 @@ import 'dart:html';
 import 'package:companions_web/models/trip.dart';
 import 'package:companions_web/models/user.dart';
 import 'package:companions_web/services/database.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
@@ -11,8 +12,10 @@ import 'package:provider/provider.dart';
 
 class AddTrip extends StatefulWidget {
   final int sectionIndex;
+  final String vkUrl;
 
-  AddTrip(@required this.sectionIndex, {Key key}) : super(key: key);
+  AddTrip(@required this.sectionIndex, @required this.vkUrl, {Key key})
+      : super(key: key);
 
   @override
   _AddTripState createState() => _AddTripState();
@@ -25,6 +28,39 @@ class _AddTripState extends State<AddTrip> {
   myUser user;
   String route;
   String buttonName = "Добавить поездку";
+  bool isnumber = false;
+
+  Widget getTypeConnection() {
+    if (isnumber) {
+      return Card(
+        margin: EdgeInsets.all(10),
+        child: FormBuilderTextField(
+          keyboardType: TextInputType.phone,
+          attribute: 'Номер телефона',
+          decoration: InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: "Номер телефона",
+          ),
+          maxLength: 11,
+          onChanged: (dynamic val) {
+            setState(() {
+              trip.phone = val;
+            });
+          },
+        ),
+      );
+    } else {
+      return Card(
+          margin: EdgeInsets.all(10),
+          child: IconButton(
+            onPressed: () {},
+            icon: Image.asset(
+              'assets/images/vk_logo.png',
+              scale: 1,
+            ),
+          ));
+    }
+  }
 
   String getRouteName(int index) {
     switch (index) {
@@ -72,6 +108,7 @@ class _AddTripState extends State<AddTrip> {
   }
 
   void _saveTrip() async {
+    if (!isnumber) trip.phone = "";
     if (trip.phone == null ||
         trip.seats == null ||
         trip.time == null ||
@@ -89,6 +126,7 @@ class _AddTripState extends State<AddTrip> {
       if (trip.uid == null) {
         trip.author = user.id;
       }
+      trip.vkurl = widget.vkUrl;
       trip.route = getRouteName(widget.sectionIndex);
       if (trip.comment == null) trip.comment = '';
       await DatabaseService().addTrip(trip, route);
@@ -196,23 +234,52 @@ class _AddTripState extends State<AddTrip> {
                           },
                         ),
                       ),
-                      Card(
+                      Container(
+                        decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
                         margin: EdgeInsets.all(10),
-                        child: FormBuilderTextField(
-                          keyboardType: TextInputType.phone,
-                          attribute: 'Номер телефона',
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: "Номер телефона",
-                          ),
-                          maxLength: 11,
-                          onChanged: (dynamic val) {
-                            setState(() {
-                              trip.phone = val;
-                            });
-                          },
+                        child: Row(
+                          children: <Widget>[
+                            Text(
+                              'Номер телефона',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            CupertinoSwitch(
+                              value: isnumber,
+                              onChanged: (bool value) {
+                                setState(() {
+                                  isnumber = !isnumber;
+                                });
+                              },
+                            ),
+                            Image.asset(
+                              'assets/images/vk_logo.png',
+                              scale: 4,
+                            ),
+                          ],
                         ),
                       ),
+                      if (isnumber)
+                        Card(
+                          margin: EdgeInsets.all(10),
+                          child: FormBuilderTextField(
+                            keyboardType: TextInputType.phone,
+                            attribute: 'Номер телефона',
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: "Номер телефона",
+                            ),
+                            maxLength: 11,
+                            onChanged: (dynamic val) {
+                              setState(() {
+                                trip.phone = val;
+                              });
+                            },
+                          ),
+                        ),
                       Card(
                         margin: EdgeInsets.all(10),
                         child: FormBuilderTextField(

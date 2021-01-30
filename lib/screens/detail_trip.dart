@@ -7,8 +7,7 @@ class DetailTrip extends StatelessWidget {
 
   const DetailTrip(@required this.trip, {Key key}) : super(key: key);
 
-  launchURL() async {
-    const url = 'https://vk.com/id510476975';
+  launchURL(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -66,29 +65,37 @@ class DetailTrip extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      trip.group,
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Text(trip.name),
-                    GestureDetector(
-                      onTap: () async {
-                        launchURL();
-                      },
-                      child: Text(
-                        'Номер телефона',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            trip.group + '   ',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          GestureDetector(
+                              onTap: () async {
+                                launchURL(trip.vkurl);
+                              },
+                              child: Image.asset(
+                                'assets/images/vk_logo.png',
+                                scale: 4,
+                              )),
+                        ],
                       ),
-                    ),
-                    Text(trip.phone)
-                  ],
-                ),
+                      Text(trip.name),
+                      if (trip.phone.isNotEmpty) ...[
+                        Text(
+                          'Номер телефона',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        Text(trip.phone)
+                      ],
+                    ]),
                 getImageGroup(trip.group)
               ],
             ),
@@ -142,55 +149,6 @@ class DetailTrip extends StatelessWidget {
           elevation: 0,
           backgroundColor: Colors.white.withOpacity(0),
         ),
-        body: _buildBody(context, trip)
-        //  Center(
-        //     child: CustomScrollView(slivers: <Widget>[
-        //   SliverList(
-        //     delegate: SliverChildBuilderDelegate((context, int i) {
-        // //       return Container(
-        //         decoration: BoxDecoration(
-        //           color: Colors.orange,
-        //           borderRadius: const BorderRadius.only(
-        //               topLeft: Radius.circular(20),
-        //               topRight: Radius.circular(20)),
-        //         ),
-        //         child: Column(children: <Widget>[
-        //           getImageGroup(trip.group),
-        //           Text(trip.route,
-        //               style: TextStyle(
-        //                 fontSize: 30,
-        //               ),
-        //               textAlign: TextAlign.center),
-        //           Text(trip.time,
-        //               style: TextStyle(
-        //                 fontSize: 30,
-        //               ),
-        //               textAlign: TextAlign.center),
-        //           Text('Количесто мест: ' + trip.seats,
-        //               style: TextStyle(
-        //                 fontSize: 30,
-        //               ),
-        //               textAlign: TextAlign.center),
-        //           Text(trip.group,
-        //               style: TextStyle(
-        //                 fontSize: 30,
-        //               ),
-        //               textAlign: TextAlign.center),
-        //           Text('Номер телефона: ' + trip.phone,
-        //               style: TextStyle(
-        //                 fontSize: 30,
-        //               ),
-        //               textAlign: TextAlign.center),
-        //           Text(trip.comment,
-        //               style: TextStyle(
-        //                 fontSize: 20,
-        //               ),
-        //               textAlign: TextAlign.center),
-        //         ]),
-        //       );
-        //     }, childCount: 1),
-        //   )
-        // ]))
-        );
+        body: _buildBody(context, trip));
   }
 }
